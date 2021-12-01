@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Products from "../../components/Products/Products";
+import NotFound from "./notFound";
+
 const Tab = styled.button`
   font-size: 16px;
   padding: 20px 40px;
@@ -18,16 +20,11 @@ const Tab = styled.button`
     opacity: 1;
   `}
 `;
-const Margin = styled.div`
-  margin-top: 80px;
-`;
+
 const ButtonGroup = styled.div`
   display: flex;
 `;
-const MembersContainer = styled.div`
-  width: 100%;
-  margin-top: 5%;
-`;
+
 const types = ["Products", "My Products"];
 
 export default function TabGroup(props) {
@@ -51,7 +48,7 @@ export default function TabGroup(props) {
       ) : token ? (
         <Products show="myProducts" />
       ) : (
-        <div />
+        <NotFound />
       )}
     </div>
   );

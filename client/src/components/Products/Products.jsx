@@ -6,6 +6,7 @@ import useStyles from "./Productsstyles";
 import styled from "styled-components";
 import AddProduct from "./addProduct";
 import GetProducts from "../../actions/getProducts";
+
 const SearchBar = styled.input`
   width: auto;
   min-width: 40%;

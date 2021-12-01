@@ -7,9 +7,7 @@ const GetProducts = () => {
     axios
       .get("http://localhost:5000/product/getProducts")
       .then((res) => {
-        console.log("res", res);
         setData(res.data);
-        console.log("hey hi hello");
       })
       .catch((error) => console.log(error));
   }, []);
