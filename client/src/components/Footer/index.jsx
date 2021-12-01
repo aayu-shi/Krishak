@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 import styled from "styled-components";
 import { FaFacebookF, FaTwitter, FaGoogle } from "react-icons/fa";
-import Icon from "../../containers/Login/components/Icon";
+import Icon from "../Icons/icon";
 
 const Heading = styled.h5`
   color: #595959;

@@ -1,18 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Grid } from "@material-ui/core";
 import Product from "./Product/Product";
 import useStyles from "./Productsstyles";
-import wheat from "../../assets/wheat.jpg";
-import rice from "../../assets/rice.png";
-import corn from "../../assets/corn.jpg";
-import barley from "../../assets/barley.jpg";
-import potato from "../../assets/potato.png";
 import styled from "styled-components";
-
+import AddProduct from "./addProduct";
+import GetProducts from "../../actions/getProducts";
 const SearchBar = styled.input`
   width: auto;
   min-width: 40%;
   height: auto;
+  max-height: 40px;
   border: 1px solid rgba(75, 163, 159, 0.85);
   border-radius: 17px;
   :focus {
@@ -25,47 +23,56 @@ const SearchBar = styled.input`
   padding-bottom: 0.5%;
 `;
 const SearchWrapper = styled.div`
-  margin-left: 40%;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
 `;
-const Margin = styled.div`
-  margin-top: 80px;
-`;
+function parseJwt(token) {
+  if (!token) {
+    return;
+  }
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace("-", "+").replace("_", "/");
+  let currentUser = JSON.parse(window.atob(base64));
+  return {
+    duration: currentUser.duration,
+    email: currentUser.email,
+    exp: currentUser.exp,
+    iat: currentUser.iat,
+    _id: currentUser.userId,
+  };
+}
 
-const products = [
-  { id: 1, name: "Wheat", descrption: "crop1", price: "10/kg", image: wheat, number:1800-180-1551},
-  { id: 2, name: "Rice", descrption: "crop2", price: "20/kg", image: rice, number:1800-180-1551},
-  { id: 3, name: "Corn", descrption: "crop3", price: "30/kg", image: corn , number:1800-180-1551},
-  { id: 4, name: "Barley", descrption: "crop4", price: "20/kg", image: barley, number:1800-180-1551 },
-  { id: 5, name: "Potato", descrption: "crop5", price: "15/kg", image: potato , number:1800-180-1551},
-  { id: 6, name: "Wheat", descrption: "crop1", price: "12/kg", image: wheat, number:1800-180-1551},
-  { id: 7, name: "Rice", descrption: "crop2", price: "17/kg", image: rice , number:1800-180-1551},
-  { id: 8, name: "Corn", descrption: "crop3", price: "25/kg", image: corn , number:1800-180-1551},
-  { id: 9, name: "Barley", descrption: "crop4", price: "18/kg", image: barley , number:1800-180-1551},
-  {
-    id: 10,
-    name: "Potato",
-    descrption: "crop5",
-    price: "9/kg",
-    image: potato,
-  },
-];
+const Products = (props) => {
+  const token = sessionStorage.getItem("token");
+  const currentUser = parseJwt(token);
+  console.log(currentUser);
 
-const Products = () => {
   const searchTerm = (e) => {
     setTerm(e.target.value);
   };
+  const allProducts = GetProducts();
+  let myProducts = allProducts.filter((data) => {
+    return currentUser?._id.includes(data.creator);
+  });
+  let products;
+  if (props.show === "myProducts") {
+    products = myProducts;
+  } else {
+    products = allProducts;
+  }
   const classes = useStyles();
   const [term, setTerm] = useState("");
-  console.log(term);
   return (
     <main className={classes.content}>
-      <Margin />
       <SearchWrapper>
         <SearchBar
           onChange={searchTerm}
           autoComplete="off"
           placeholder="search"
         />
+        <AddProduct />
       </SearchWrapper>
       <div className={classes.toolbar} />
       <Grid container justify="center" spacing={2} className={classes.root}>

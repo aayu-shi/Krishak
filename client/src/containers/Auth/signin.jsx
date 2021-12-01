@@ -30,9 +30,9 @@ function Login(props) {
     axios
       .post("http://localhost:5000/auth/signin", user)
       .then((res) => {
-        // setToken(res.data?.token);
-        // sessionStorage.setItem("role", res.data?.message?.role);
-        // props.setUserLogin(res.data.message);
+        alert("signin successfull !!");
+        setToken(res.data?.token);
+        props.setUserLogin(res.data.message);
         history.push("/");
       })
       .catch((error) => {

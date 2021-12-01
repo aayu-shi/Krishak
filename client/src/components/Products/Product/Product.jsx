@@ -27,7 +27,6 @@ const Product = ({ product }) => {
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="h5" gutterBottom>
-            {" "}
             {/* used for text statemets in material ui, variant defines 
                                                                 text size and gutterbottom means sapce at the bottom */}
             {product.name}

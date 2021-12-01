@@ -9,7 +9,7 @@ export function HomePage(props) {
     <div>
       <PageContainer>
         <TopSection>
-          <Navbar />
+          <Navbar setUserLogin={props.setUserLogin} />
         </TopSection>
       </PageContainer>
       <br />

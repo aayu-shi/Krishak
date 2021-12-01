@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Logo } from "../Logo";
 import { Marginer } from "../Margin";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 const NavConatiner = styled.div`
   width: 100%;
@@ -40,8 +40,36 @@ const Seperator = styled.div`
   background-color: #fff;
 `;
 
-export function Navbar() {
+export function Navbar(props) {
+  console.log(props);
   const { pathname } = useLocation();
+  const token = sessionStorage.getItem("token");
+  function parseJwt(token) {
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    let currentUser = JSON.parse(window.atob(base64));
+    return {
+      duration: currentUser.duration,
+      email: currentUser.email,
+      exp: currentUser.exp,
+      iat: currentUser.iat,
+      _id: currentUser.userId,
+    };
+  }
+  const currentUser = parseJwt(token);
+  console.log(currentUser);
+
+  const history = useHistory();
+  const logout = () => {
+    // props.setUserLogin({});
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+    history.push("/signin");
+  };
+
   let color = "";
   let position = "";
   if (pathname !== "/") {
@@ -63,6 +91,10 @@ export function Navbar() {
             style={{ textDecoration: "none" }}
           >
             <AnchorLink>Crop Cart </AnchorLink>
+          </Link>
+          <Marginer direction="horizontal" margin={15} />
+          <Link to={{ pathname: "/news" }} style={{ textDecoration: "none" }}>
+            <AnchorLink>News </AnchorLink>
           </Link>
           <Marginer direction="horizontal" margin={15} />
           <Link
@@ -89,9 +121,16 @@ export function Navbar() {
           <Marginer direction="horizontal" margin={10} />
           <Seperator />
           <Marginer direction="horizontal" margin={10} />
-          <Link to={{ pathname: "/signin" }} style={{ textDecoration: "none" }}>
-            <Button size={13}>Login/Signup</Button>
-          </Link>
+          {currentUser?._id ? (
+            <AnchorLink onClick={logout}>Logout</AnchorLink>
+          ) : (
+            <Link
+              to={{ pathname: "/signin" }}
+              style={{ textDecoration: "none" }}
+            >
+              <Button size={13}>Login/Signup</Button>
+            </Link>
+          )}
         </AcessisbilityContainer>
       </NavConatiner>
     </div>

@@ -51,6 +51,8 @@ const SloganText = styled.h3`
 
 export function TopSection(props) {
   const { children } = props;
+  const token = sessionStorage.getItem("token");
+  console.log("token", token);
   return (
     <TopSectionContainer>
       <BackgroundFilter>
@@ -62,12 +64,16 @@ export function TopSection(props) {
             <SloganText>Caring Fields, Caring People,</SloganText>
             <SloganText>Caring Lives</SloganText>
             <Marginer direction="vertical" margin={12} />
-            <Link
-              to={{ pathname: "/login" }}
-              style={{ textDecoration: "none" }}
-            >
-              <Button>Join Now</Button>
-            </Link>
+            {token ? (
+              <div />
+            ) : (
+              <Link
+                to={{ pathname: "/signin" }}
+                style={{ textDecoration: "none" }}
+              >
+                <Button>Join Now</Button>
+              </Link>
+            )}
           </LogoContainer>
           <TopImage>{/* <img src={""} alt="best in the field"/> */}</TopImage>
         </InnerContainer>

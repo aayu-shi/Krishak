@@ -6,6 +6,7 @@ require("dotenv").config({
 });
 let session = require("express-session");
 const authRoutes = require("./routes/auth");
+const productRoutes = require("./routes/product");
 
 //app
 const app = express();
@@ -33,6 +34,7 @@ app.use(cors());
 
 //routes middleware
 app.use("/auth", authRoutes);
+app.use("/product", productRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
