@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
+import { Button, Input } from "../../../components/commonStyles";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -7,11 +8,11 @@ class SearchBar extends React.Component {
     this.state = { searchTopic: "" };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ searchTopic: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.searchForTopic(this.state.searchTopic);
   };
@@ -21,15 +22,27 @@ class SearchBar extends React.Component {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
-            <Form.Input
-              placeholder="Search topic"
-              name="topic"
-              value={this.state.searchTopic}
-              onChange={this.handleChange}
-            />
-            <Button type="submit" color="green">
-              Search
-            </Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Input
+                placeholder="Search topic"
+                name="topic"
+                value={this.state.searchTopic}
+                onChange={this.handleChange}
+                style={{
+                  marginTop: "11px",
+                  marginRight: "11px",
+                }}
+              />
+              <Button type="submit" color="green">
+                Search
+              </Button>
+            </div>
           </Form.Group>
         </Form>
       </div>
