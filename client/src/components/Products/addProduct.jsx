@@ -12,7 +12,6 @@ import {
   Buttons,
   RightAlign,
   ErrorMsg,
-  CenterAlign,
 } from "../commonStyles";
 //styles for react modal
 const customStyles = {
@@ -182,7 +181,7 @@ const AddProduct = () => {
 
           <Buttons>
             <Button variant="contained" onClick={create}>
-              Upload Assignment
+              Add product
             </Button>
             <Button variant="contained" onClick={closeModal}>
               Cancel

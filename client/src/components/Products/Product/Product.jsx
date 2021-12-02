@@ -5,18 +5,35 @@ import {
   CardContent,
   CardActions,
   Typography,
+  IconButton,
 } from "@material-ui/core";
 import { Button } from "../../Button";
 import AddIcCallIcon from "@material-ui/icons/AddIcCall";
 import useStyles from "./styles";
 import styled from "styled-components";
+import DeleteIcon from "@material-ui/icons/Delete";
+import axios from "axios";
 
 const ButtonItem = styled.div`
   display: flex;
 `;
-
-const Product = ({ product }) => {
+function deleteProduct(id) {
+  const config = {
+    params: {
+      id: id,
+    },
+  };
+  axios
+    .get("http://localhost:5000/product/deleteProduct", config)
+    .then((res) => {
+      alert("deleted sucessfully");
+      window.location.reload();
+    })
+    .catch((error) => console.log(error));
+}
+const Product = ({ product, show }) => {
   const classes = useStyles();
+  const contact = product.contact;
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -36,16 +53,35 @@ const Product = ({ product }) => {
           </Typography>
         </div>
         <Typography variant="body2" color="textSecondary">
-          {" "}
-          {/* textSecondary means slightly greyish color */}
-          {product.descrption}
+          {product.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
+        {show === "myProducts" ? (
+          <IconButton
+            color="success"
+            aria-label="upload picture"
+            component="span"
+          >
+            <DeleteIcon
+              onClick={() => {
+                deleteProduct(product._id);
+              }}
+            />
+          </IconButton>
+        ) : (
+          <div></div>
+        )}
+
         <Button size={14} apperance="regular">
           <ButtonItem>
             <AddIcCallIcon />
-            <div style={{ margin: "4px" }}>Contact Seller</div>
+            <div
+              style={{ margin: "4px" }}
+              onClick={() => navigator.clipboard.writeText(contact)}
+            >
+              Contact Seller
+            </div>
           </ButtonItem>
         </Button>
       </CardActions>

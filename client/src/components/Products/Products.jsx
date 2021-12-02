@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Grid } from "@material-ui/core";
 import Product from "./Product/Product";
 import useStyles from "./Productsstyles";
@@ -86,7 +85,7 @@ const Products = (props) => {
           })
           .map((product) => (
             <Grid item key={product.id} xs={12} s={6} md={3} l={3}>
-              <Product product={product} />
+              <Product product={product} show={props.show} />
             </Grid>
           ))}
       </Grid>

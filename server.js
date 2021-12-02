@@ -21,6 +21,67 @@ app.use(
   })
 );
 
+// Getting Data from .env file
+const accountSid = process.env.ACC_SID;
+const authToken = process.env.AUTH_TOKEN;
+const twilio = require("twilio");
+const client = new twilio(accountSid, authToken);
+
+const request = require("request");
+
+// function getdata() {
+//   request(
+//     "http://api.openweathermap.org/data/2.5/weather?q=delhi&appid=90b9f7d4a4ff35d02ea7776429c4e05f&units=metric",
+//     { json: true },
+//     (err, res, body) => {
+//       if (err) {
+//         return console.log(err);
+//       }
+
+//       // Printing fetched data
+//       console.log(body);
+//     }
+//   );
+// }
+function getdata() {
+  request(
+    "http://api.openweathermap.org/data/2.5/weather?q=delhi&appid=90b9f7d4a4ff35d02ea7776429c4e05f&units=metric",
+    { json: true },
+    (err, res, body) => {
+      if (err) {
+        return console.log(err);
+      }
+
+      // Create a message
+      let msg = `\nToday's Weather : \n${body.weather[0].main}, ${body.main.temp}°C\nHumidity : ${body.main.humidity}%    
+      `;
+
+      // Calling Send Message function
+      sendNotification(msg);
+    }
+  );
+}
+
+// Calling function
+getdata();
+
+function sendNotification(msg) {
+  client.messages
+    .create({
+      body: msg,
+      to: process.env.TO,
+      from: process.env.FROM,
+    })
+    .then((message) => console.log(message.sid));
+}
+const cron = require("node-cron");
+
+// Cronjob runs everyday at 8:00 AM
+cron.schedule("0 8 * * *", () => {
+  // Calling getData method which
+  // calls the send message method
+  getData();
+});
 // db
 mongoose
   .connect(process.env.CONNECTION_URL, {

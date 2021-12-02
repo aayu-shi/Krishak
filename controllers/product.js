@@ -32,6 +32,18 @@ exports.createProduct = (req, res) => {
     });
 };
 
-exports.deleteProduct = (req, res) => {
-  res.status(200).json("product deleted");
+exports.deleteProduct = async (req, res) => {
+  const id = req.query.id;
+  const query = Product.findByIdAndDelete(id, (err, element) => {
+    if (err) {
+      res.status(404).json({ message: error });
+    } else {
+      res.status(200).json("deleted successfully");
+    }
+  });
+  try {
+    await query.clone();
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
 };
