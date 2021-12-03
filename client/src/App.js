@@ -12,13 +12,9 @@ import Signup from "./containers/Auth/signup";
 import Helpline from "./containers/Helpline";
 import useToken from "./customHooks/useToken";
 import NewsApp from "./containers/News";
-import { useMediaQuery, useTheme } from "@material-ui/core";
 
 function App() {
   const { token, setToken } = useToken();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log(isMobile);
   //user token
   const [user, setUserLogin] = useState(token ? parseJwt(token) : {});
   function parseJwt(token) {

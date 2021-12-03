@@ -7,7 +7,6 @@ const Tab = styled.button`
   font-size: 16px;
   padding: 20px 40px;
   cursor: pointer;
-  opacity: 0.6;
   background: white;
   border: 0;
   outline: 0;
@@ -19,6 +18,7 @@ const Tab = styled.button`
     border-bottom: 2px solid rgba(75, 163, 159);
     opacity: 1;
   `}
+  overflow:visible;
 `;
 
 const ButtonGroup = styled.div`

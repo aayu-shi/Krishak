@@ -34,6 +34,10 @@ function deleteProduct(id) {
 const Product = ({ product, show }) => {
   const classes = useStyles();
   const contact = product.contact;
+  function copyText() {
+    navigator.clipboard.writeText(contact);
+    alert("contact copied to clipboard");
+  }
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -76,10 +80,7 @@ const Product = ({ product, show }) => {
         <Button size={14} apperance="regular">
           <ButtonItem>
             <AddIcCallIcon />
-            <div
-              style={{ margin: "4px" }}
-              onClick={() => navigator.clipboard.writeText(contact)}
-            >
+            <div style={{ margin: "4px" }} onClick={() => copyText()}>
               Contact Seller
             </div>
           </ButtonItem>
