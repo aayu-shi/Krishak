@@ -100,7 +100,7 @@ export function Navbar(props) {
                 <Dropdown.Item href="/news">News</Dropdown.Item>
                 <Dropdown.Item href="/weather">Weather</Dropdown.Item>
                 <Dropdown.Item
-                  href="/https://www.covid19india.org/"
+                  href="https://www.covid19india.org/"
                   target="_blank"
                 >
                   Covid Updates

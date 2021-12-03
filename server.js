@@ -29,20 +29,6 @@ const client = new twilio(accountSid, authToken);
 
 const request = require("request");
 
-// function getdata() {
-//   request(
-//     "http://api.openweathermap.org/data/2.5/weather?q=delhi&appid=90b9f7d4a4ff35d02ea7776429c4e05f&units=metric",
-//     { json: true },
-//     (err, res, body) => {
-//       if (err) {
-//         return console.log(err);
-//       }
-
-//       // Printing fetched data
-//       console.log(body);
-//     }
-//   );
-// }
 function getdata() {
   request(
     "http://api.openweathermap.org/data/2.5/weather?q=delhi&appid=90b9f7d4a4ff35d02ea7776429c4e05f&units=metric",

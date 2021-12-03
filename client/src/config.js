@@ -34,7 +34,7 @@ const config = {
         options: [
           {
             text: "Weather Update",
-            url: "https://www.timeanddate.com/weather/india/sirsa/ext",
+            url: "/weather",
             id: 1,
           },
         ],
@@ -47,7 +47,7 @@ const config = {
         options: [
           {
             text: "Covid-19 Update",
-            url: "https://kishikamittal.github.io/covidUpdate/",
+            url: "https://www.covid19india.org/",
             id: 1,
           },
         ],
@@ -60,7 +60,20 @@ const config = {
         options: [
           {
             text: "Price Update",
-            url: "https://agmarknet.gov.in/",
+            url: "/",
+            id: 1,
+          },
+        ],
+      },
+    },
+    {
+      widgetName: "cropLinks",
+      widgetFunc: (props) => <LinkList {...props} />,
+      props: {
+        options: [
+          {
+            text: "Crop Cart",
+            url: "/cropcart",
             id: 1,
           },
         ],
@@ -73,7 +86,7 @@ const config = {
         options: [
           {
             text: "Latest News",
-            url: "https://economictimes.indiatimes.com/topic/farmers",
+            url: "/news",
             id: 1,
           },
         ],
@@ -86,7 +99,20 @@ const config = {
         options: [
           {
             text: "Feedback Form",
-            url: "https://www.google.com/forms/about/",
+            url: "https://forms.gle/CSfPVXhYkd1Cx5As5",
+            id: 1,
+          },
+        ],
+      },
+    },
+    {
+      widgetName: "helplineLinks",
+      widgetFunc: (props) => <LinkList {...props} />,
+      props: {
+        options: [
+          {
+            text: "Helpline Numbers",
+            url: "/helpline",
             id: 1,
           },
         ],

@@ -54,7 +54,7 @@ class App extends React.Component {
         )}
         {articles.length > 0 && (
           <Header as="h4" style={{ textAlign: "center", margin: 20 }}>
-            Found {totalResults} articles on "{searchTopic}"
+            Articles on "{searchTopic}"
           </Header>
         )}
         {articles.length > 0 && <ArticleList articles={articles} />}
