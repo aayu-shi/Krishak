@@ -34,8 +34,6 @@ class MessageParser {
     }
     if (lowerCaseMessage.includes("helpline")) {
       this.actionProvider.handlehelplineLinks();
-    } else {
-      this.actionProvider.errormsg();
     }
   }
 }

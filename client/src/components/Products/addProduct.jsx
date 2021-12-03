@@ -81,7 +81,7 @@ const AddProduct = () => {
           contact: "",
         });
         setIsOpen(false);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         setError("please fill all details correctly");
